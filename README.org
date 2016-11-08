@@ -1,0 +1,3 @@
+* dropbox-conflicts.el
+
+A package to detect conflicted copies of files in your Dropbox on open.
