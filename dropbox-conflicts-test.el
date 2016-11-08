@@ -37,8 +37,12 @@
 (when (fboundp 'undercover)
   (undercover "dropbox-conflicts.el"))
 
-(ert-deftest dropbox-conflicts-basic-test ()
-  (should (equal 1 1)))
+(ert-deftest dropbox-conflicts-test-find-conflicts ()
+  "Tests that conflicted copies are correctly found"
+  (should (not (dropbox-conflicts-find-copies "./fixtures/no-conflicts.txt")))
+  (should (dropbox-conflicts-find-copies "./fixtures/single-conflict.txt"))
+  (should (eq 1 (length (dropbox-conflicts-find-copies "./fixtures/single-conflicts.txt"))))
+  (should (eq 3 (length (dropbox-conflicts-find-copies "./fixtures/three-conflicts.txt")))))
 
 (provide 'dropbox-conflicts-test)
 

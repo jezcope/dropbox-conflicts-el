@@ -6,3 +6,6 @@
 (development
  (depends-on "ert")
  (depends-on "undercover"))
+
+(depends-on "f")
+(depends-on "s")
