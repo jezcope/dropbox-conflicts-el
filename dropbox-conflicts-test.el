@@ -39,8 +39,7 @@
 
 (ert-deftest dropbox-conflicts-test-find-conflicts ()
   "Tests that conflicted copies are correctly found"
-  (should (not (dropbox-conflicts-find-copies "./fixtures/no-conflicts.txt")))
-  (should (dropbox-conflicts-find-copies "./fixtures/single-conflict.txt"))
+  (should (eq nil (dropbox-conflicts-find-copies "./fixtures/no-conflicts.txt")))
   (should (eq 1 (length (dropbox-conflicts-find-copies "./fixtures/single-conflict.txt"))))
   (should (eq 3 (length (dropbox-conflicts-find-copies "./fixtures/three-conflicts.txt")))))
 
