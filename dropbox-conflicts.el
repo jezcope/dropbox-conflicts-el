@@ -66,6 +66,14 @@
                  (mapconcat (lambda (x) (concat (second x) " " (first x)))
                             details "\n  "))))))
 
+(defun dropbox-conflicts-check-for-conflicts ()
+  "Check if there are conflicted copies of the current file"
+  (interactive)
+  (dropbox-conflicts-warn-if-conflicted-copies (buffer-file-name)))
+
+;; Install it like this:
+;; (add-hook 'find-file-hook 'dropbox-conflicts-check-for-conflicts)
+
 (provide 'dropbox-conflicts)
 
 ;; Local Variables:
