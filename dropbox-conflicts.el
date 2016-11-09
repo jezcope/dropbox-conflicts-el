@@ -31,6 +31,8 @@
 (eval-when-compile (require 'cl-lib))
 
 (require 'f)
+(require 'subr-x)
+(require 'cl)
 
 (defgroup dropbox-conflicts nil
   "Detect dropbox conflicting copies when opening a file"
@@ -49,12 +51,20 @@
         (ext (f-ext path)))
     (f-glob (concat base " (*'s conflicted copy *)." ext) folder)))
 
+(defun dropbox-conflicts-extract-conflict-info (path)
+  "Get details of conflicted versions"
+  (assert (string-match "(\\([[:alnum:].]+\\)'s conflicted copy \\([[:digit:]]\\{4\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\))" path))
+  (list (match-string 1 path)
+        (match-string 2 path)))
+
 (defun dropbox-conflicts-warn-if-conflicted-copies (path)
   "Warn if there are conflicted copies of the given file"
-  (let ((copies (find-dropbox-conflicted-copies path)))
+  (let ((copies (dropbox-conflicts-find-copies path)))
     (when copies
-      (message "Conflicting copies of this file exist in dropbox: %s"
-               (s-join ", " (mapcar 'f-base copies))))))
+      (message "Conflicting copies of this file exist in dropbox:\n  %s"
+               (let ((details (mapcar 'dropbox-conflicts-extract-conflict-info copies)))
+                 (mapconcat (lambda (x) (concat (second x) " " (first x)))
+                            details "\n  "))))))
 
 (provide 'dropbox-conflicts)
 

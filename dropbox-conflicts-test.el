@@ -43,6 +43,11 @@
   (should (eq 1 (length (dropbox-conflicts-find-copies "./fixtures/single-conflict.txt"))))
   (should (eq 3 (length (dropbox-conflicts-find-copies "./fixtures/three-conflicts.txt")))))
 
+(ert-deftest dropbox-conflicts-test-extract-conflict-info ()
+  "Tests that information is parsed from conflict filenames correctly"
+  (should (equal '("fred.example.com" "2016-11-08")
+                 (dropbox-conflicts-extract-conflict-info "/tmp/single-conflict (fred.example.com's conflicted copy 2016-11-08).txt"))))
+
 (provide 'dropbox-conflicts-test)
 
 ;;; dropbox-conflicts-test.el ends here
