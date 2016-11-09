@@ -29,10 +29,10 @@
 
 ;;; Code:
 (eval-when-compile (require 'cl-lib))
+(eval-when-compile (require 'cl))
 
 (require 'f)
 (require 'subr-x)
-(require 'cl)
 
 (defgroup dropbox-conflicts nil
   "Detect dropbox conflicting copies when opening a file"
