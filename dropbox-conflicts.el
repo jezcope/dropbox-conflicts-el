@@ -1,4 +1,4 @@
-;;; dropbox-conflicts.el --- Detect dropbox conflicting copies when opening a file -*- lexical-binding: t -*-
+;;; dropbox-conflicts.el --- Detect dropbox conflicting copies when opening a file  -*- lexical-binding: t; -*-
 
 ;; Copyright (c) 2016 Jez Cope <j.cope@erambler.co.uk>
 
@@ -61,4 +61,5 @@
 ;; Local Variables:
 ;; nameless-current-name: "dropbox-conflicts"
 ;; End:
+
 ;;; dropbox-conflicts.el ends here
