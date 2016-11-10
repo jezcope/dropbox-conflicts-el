@@ -71,8 +71,14 @@
   (interactive)
   (dropbox-conflicts-warn-if-conflicted-copies (buffer-file-name)))
 
-;; Install it like this:
-;; (add-hook 'find-file-hook 'dropbox-conflicts-check-for-conflicts)
+(define-minor-mode dropbox-conflicts-mode
+  :init-value nil
+  :lighter nil
+  :keymap nil
+  :global t
+  (if dropbox-conflicts-mode
+      (add-hook 'find-file-hook 'dropbox-conflicts-check-for-conflicts)
+    (remove-hook 'find-file-hook 'dropbox-conflicts-check-for-conflicts)))
 
 (provide 'dropbox-conflicts)
 
