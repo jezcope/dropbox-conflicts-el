@@ -53,7 +53,7 @@
 
 (defun dropbox-conflicts-extract-conflict-info (path)
   "Get details of conflicted versions"
-  (assert (string-match "(\\([[:alnum:].]+\\)'s conflicted copy \\([[:digit:]]\\{4\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\))" path))
+  (assert (string-match "(\\([[:alnum:].-]+\\)'s conflicted copy \\([[:digit:]]\\{4\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\))" path))
   (list (match-string 1 path)
         (match-string 2 path)))
 
