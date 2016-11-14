@@ -40,20 +40,20 @@
   :group 'applications)
 
 (defun dropbox-conflicts-find-copies (path)
-  "Find potential conflicted copies of a file"
+  "Find potential conflicted copies of the file given by PATH."
   (let ((folder (f-parent path))
         (base (f-base path))
         (ext (f-ext path)))
     (f-glob (concat base " (*'s conflicted copy *)." ext) folder)))
 
 (defun dropbox-conflicts-extract-conflict-info (path)
-  "Get details of conflicted versions"
+  "Extract hostname and date from PATH."
   (assert (string-match "(\\([[:alnum:].-]+\\)'s conflicted copy \\([[:digit:]]\\{4\\}-[[:digit:]]\\{2\\}-[[:digit:]]\\{2\\}\\))" path))
   (list (match-string 1 path)
         (match-string 2 path)))
 
 (defun dropbox-conflicts-warn-if-conflicted-copies (path)
-  "Warn if there are conflicted copies of the given file"
+  "Warn if there are conflicted copies of the file given by PATH."
   (let ((copies (dropbox-conflicts-find-copies path)))
     (when copies
       (message "Conflicting copies of this file exist in dropbox:\n  %s"
@@ -62,7 +62,7 @@
                             details "\n  "))))))
 
 (defun dropbox-conflicts-check-for-conflicts ()
-  "Check if there are conflicted copies of the current file"
+  "Check if there are conflicted copies of the current file."
   (interactive)
   (dropbox-conflicts-warn-if-conflicted-copies (buffer-file-name)))
 
