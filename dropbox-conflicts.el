@@ -39,11 +39,6 @@
   :prefix "dropbox-conflicts-"
   :group 'applications)
 
-(defcustom dropbox-conflicts-foo ""
-  "Description of variable."
-  :type 'string
-  :group 'dropbox-conflicts)
-
 (defun dropbox-conflicts-find-copies (path)
   "Find potential conflicted copies of a file"
   (let ((folder (f-parent path))
