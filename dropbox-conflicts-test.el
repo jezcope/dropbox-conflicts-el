@@ -29,6 +29,16 @@
 
 ;; The unit test suite of dropbox-conflicts
 
+;; Contents of ./fixtures/ is as follows:
+
+;; no-conflicts.txt
+;; single-conflict (fred's conflicted copy 2016-11-08).txt
+;; single-conflict.txt
+;; three-conflicts (erwin's conflicted copy 2016-11-04).txt
+;; three-conflicts (fred's conflicted copy 2016-10-23).txt
+;; three-conflicts (rebecca's conflicted copy 2016-09-03).txt
+;; three-conflicts.txt
+
 ;;; Code:
 
 (require 'dropbox-conflicts)
@@ -47,6 +57,23 @@
   "Tests that information is parsed from conflict filenames correctly"
   (should (equal '("fred-home.example.com" "2016-11-08")
                  (dropbox-conflicts-extract-conflict-info "/tmp/single-conflict (fred-home.example.com's conflicted copy 2016-11-08).txt"))))
+
+(ert-deftest dropbox-conflicts-test-warn ()
+  "Tests that warnings are correctly given"
+  (save-excursion
+    (dropbox-conflicts-warn-if-conflicted-copies "./fixtures/no-conflicts.txt")
+    (switch-to-buffer "*Messages*")
+    (goto-char (point-min))
+    (should (not (search-forward "Conflicting copies of this file exist in dropbox" nil t)))
+
+    (dropbox-conflicts-warn-if-conflicted-copies "./fixtures/single-conflict.txt")
+    (switch-to-buffer "*Messages*")
+    (goto-char (point-min))
+    (should (search-forward "Conflicting copies of this file exist in dropbox" nil t))
+    (goto-char (point-min))
+    (should (search-forward "fred"))
+    (goto-char (point-min))
+    (should (search-forward "2016-11-08"))))
 
 (provide 'dropbox-conflicts-test)
 
