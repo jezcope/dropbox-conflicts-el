@@ -1,3 +1,5 @@
 * dropbox-conflicts.el
 
+[[https://travis-ci.org/jezcope/dropbox-conflicts-el.svg?branch=master]]
+
 A package to detect conflicted copies of files in your Dropbox on open.
