@@ -66,6 +66,7 @@
   (interactive)
   (dropbox-conflicts-warn-if-conflicted-copies (buffer-file-name)))
 
+;;;###autoload
 (define-minor-mode dropbox-conflicts-mode
   :init-value nil
   :lighter nil
