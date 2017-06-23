@@ -56,7 +56,8 @@
   "Warn if there are conflicted copies of the file given by PATH."
   (let ((copies (dropbox-conflicts-find-copies path)))
     (when copies
-      (message "Conflicting copies of this file exist in dropbox:\n  %s"
+      (message "Conflicting copies of %s exist in dropbox:\n  %s"
+               path
                (let ((details (mapcar 'dropbox-conflicts-extract-conflict-info copies)))
                  (mapconcat (lambda (x) (concat (second x) " " (first x)))
                             details "\n  "))))))
